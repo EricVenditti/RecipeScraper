@@ -56,6 +56,8 @@ def metro_food_search(item):
 
 def get_price(item):
     if (item == None or item == ""): return 0.0
+            for (word in ingredientDescriptions):   # if there is another descriptive word that can be removed
+                item = ingredientDescriptions.replace(word, "")
     price_arr = metro_food_search(item)
     if (len(price_arr) == 0): return 0.0
     price = min(metro_food_search(item))
