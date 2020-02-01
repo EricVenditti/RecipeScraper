@@ -40,8 +40,13 @@ def metro_food_search(item):
     
     return price_return_arr
 
-
+items = ["avocados", "tomatoes", "onion", "cilantro", "lemon juice", "jalapeno pepper"]
 # TESTING
+
+for item in items:
+    print(item)
+    metro_food_search(item)
+
 print("banana")
 metro_food_search("banana")
 print("apple")

@@ -11,7 +11,7 @@ success is 200. troubleshoot codes at restapitutorial.com
 
 CONTENT: the content we'd like to grab/print
 '''
-item = input("enter in what you would like to cook")
+item = "guac"#input("enter in what you would like to cook")
 url = 'https://www.allrecipes.com/search/results/?wt=' + str(item) + '&sort=re'
 print(url)
 
@@ -28,15 +28,9 @@ recipes = []
 # creating json objects with KEY: VALUE
 link = content.find('a').get('href')
 print(link)
-for recipe in content.findAll('article', attrs={"class": "fixed-recipe-card"}):
-    print("hi")
+for recipe in content.findAll('span', attrs={"class": "stars stars-5"}):
     recipeObject = {
-        "link": recipe.find('a', attrs={"href"}),
-        #gu"2tag": recipe.find('span', attrs={"itemprop": "name"}).text,
-        #"date": recipe.find('h5', attrs={"class": "dateTime"}).text,
-        #"tweet": recipe.find('p', attrs={"class": "content"}).text
-        # "likes": tweet.find('p', attrs={"class": "likes"}),
-        # "shares": tweet.find('p', attrs={"class": "shares"})
+        "rating": recipe.attrs['data-ratingstars']
     }
     recipes.append(recipeObject)
 
@@ -48,3 +42,8 @@ with open('recipes.json', 'w') as outfile:
 
 # select all <p> paragraph tags with tag content .text(only text
 # contents of the file)
+with open('recipes.json') as json_data:
+    jsonData = json.load(json_data)
+for i in jsonData:
+    print(i['rating'])
+    #if (i['price'].find("$") == -1): continue
