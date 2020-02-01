@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup  # bs4 is beautiful soup
 import requests
 import json
 
-from util import *
+from util import * # see util.py
 
-item = "banana"
+#item = "banana"
 
 def metro_food_search(item):
     print_arr = True
@@ -53,3 +53,5 @@ print("apple")
 metro_food_search("apple")
 print("pie")
 metro_food_search("pie")
+print("shit pie")               # test for something metro doesn't have
+metro_food_search("shit pie")

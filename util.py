@@ -1,6 +1,7 @@
 import statistics
 
 def remove_outliers(arr):
+    if (len(arr) == 0): return arr
     avg = statistics.mean(arr)
     std_dev = statistics.stdev(arr)
     for a in arr:
