@@ -58,7 +58,9 @@ def metro_food_search(item):
     return price_return_arr
 
 def get_price(item):
-    if (item == None): return
+    if (item == None or item == ""): return 0.0
+    price_arr = metro_food_search(item)
+    if (len(price_arr) == 0): return 0.0
     price = statistics.mean(metro_food_search(item))
     #print (price)
     return price
@@ -93,5 +95,6 @@ print(get_price_for_list(items))
 #metro_food_search("apple")
 #print("pie")
 #metro_food_search("pie")
-#print("shit pie")               # test for something metro doesn't have
-#metro_food_search("shit pie")
+print("shit pie")               # test for something metro doesn't have
+metro_food_search("shit pie")
+get_price("shit pie")
