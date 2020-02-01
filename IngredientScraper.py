@@ -11,12 +11,6 @@ success is 200. troubleshoot codes at restapitutorial.com
 
 CONTENT: the content we'd like to grab/print
 '''
-
-#url = 'https://www.allrecipes.com/recipe/14064/easy-guacamole/'
-#print(url)
-
-
-
 def get_ingredients(url):
     response = requests.get(url, timeout=5)  # access url 5 times max
     content = BeautifulSoup(response.content, "html.parser")
@@ -30,7 +24,7 @@ def get_ingredients(url):
                         "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
                         "fresh", "stalk", "drained", "pitted", "peeled", "beaten",
                         "salt", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water",
-                        "to taste", "add to taste", "optional"]
+                        "to taste", "add to taste", "optional", "uncooked"]
 
     tempList = nonIngredientList.copy()
     for item in tempList:
