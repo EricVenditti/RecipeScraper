@@ -40,7 +40,9 @@ class StartPage(tk.Frame):
 
         def searchRecipe():
             looking_for = message1.get()
-            recipe_to_search = looking_for
+            global recipe_to_search 
+            recipe_to_search = (looking_for+'.')[:-1] # just a copy, kinda dumb there's no built-in version of this but w/e
+            print(str(id(recipe_to_search)) + " " + str(id(looking_for)))
             print("***" + recipe_to_search)
             recipe_dict = get_top_five(looking_for)
             for recipe in recipe_dict:
