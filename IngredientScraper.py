@@ -27,8 +27,9 @@ def get_ingredients(url):
                         "firmly packed", "lightly packed", "even", "level", "rounded", "sifted",
                         "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
                         "fresh", "stalk", "drained", "pitted", "peeled",
-                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water",
-                        "to taste", "add to taste"]
+                        "salt", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water",
+                        "to taste", "add to taste", " and"]
+
     tempList = nonIngredientList.copy()
     for item in tempList:
         nonIngredientList.append(item + "s")
