@@ -12,7 +12,7 @@ success is 200. troubleshoot codes at restapitutorial.com
 CONTENT: the content we'd like to grab/print
 '''
 
-url = 'https://www.allrecipes.com/recipe/8372/black-magic-cake/?internalSource=hub%20recipe&referringContentType=Search&clickId=cardslot%204'
+url = 'https://www.allrecipes.com/recipe/15035/granola/?internalSource=hub%20recipe&referringContentType=Search'
 print(url)
 
 response = requests.get(url, timeout=5)  # access url 5 times max
@@ -28,8 +28,8 @@ nonIngredientList = ["teaspoon", "dessertspoon", "tablespoon", "ounce", "pound",
                         "pinch", "smidgen", "drop", "dash", "scruple", "coffeespoon", "pinches", "smidgens", "dashes",
                         "firmly packed", "lightly packed", "even", "level", "rounded", "sifted",
                         "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
-                        "fresh", "stalk", "drained",
-                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water"]
+                        "fresh", "stalk", "drained", "pitted", "peeled",
+                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water"]
 tempList = nonIngredientList.copy()
 for item in tempList:
     nonIngredientList.append(item + "s")
