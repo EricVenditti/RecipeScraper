@@ -15,6 +15,8 @@ CONTENT: the content we'd like to grab/print
 url = 'https://www.allrecipes.com/recipe/14064/easy-guacamole/'
 print(url)
 
+
+
 def get_ingredients(url):
     response = requests.get(url, timeout=5)  # access url 5 times max
     content = BeautifulSoup(response.content, "html.parser")
@@ -23,12 +25,12 @@ def get_ingredients(url):
     nonIngredientList = ["teaspoon", "dessertspoon", "tablespoon", "ounce", "pound",
                         "cup", "pint", "quart", "gallon",
                         "can", "bag", "package", "bulk",
-                        "pinch", "smidgen", "drop", "dash", "scruple", "coffeespoon", "pinches", "smidgens", "dashes",
+                        "pinch", "smidgen", "drop", "dash", "scruple", "coffeespoon", "pinches", "smidgens", "dashes", "clove",
                         "firmly packed", "lightly packed", "even", "level", "rounded", "sifted",
                         "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
-                        "fresh", "stalk", "drained", "pitted", "peeled",
+                        "fresh", "stalk", "drained", "pitted", "peeled", "beaten",
                         "salt", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water",
-                        "to taste", "add to taste", " and"]
+                        "to taste", "add to taste", "optional"]
 
     tempList = nonIngredientList.copy()
     for item in tempList:
@@ -41,9 +43,16 @@ def get_ingredients(url):
         # remove all the non-necessary adjectives, verbs, measurements in the ingredient list
         # preparing for searching grocery stores
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+        andLoc = ingredientText.find(" and")
+        print(andLoc)
+        if(andLoc != -1):
+            ingredientText = ingredientText[: andLoc]
         for word in nonIngredientList:
             ingredientText = ingredientText.replace(word, "")   # removes words from the list
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+        ingredientText = ingredientText.rstrip()
+        if(len(ingredientText) > 0):
+            ingredients.append(ingredientText)
 
     with open('ingredients.json', 'w') as outfile:
         json.dump(ingredients, outfile)
@@ -53,4 +62,4 @@ def get_ingredients(url):
     with open('ingredients.json') as json_data:
         jsonData = json.load(json_data)
 
-    return ingredientText
+    return ingredients
