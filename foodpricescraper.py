@@ -5,8 +5,6 @@ import statistics
 
 from util import * # see util.py
 
-#item = "banana"
-
 def metro_food_search(item):
     print_arr = False
     url = 'https://www.metro.ca/en/search?filter=' + item + '&freeText=true'
@@ -26,7 +24,6 @@ def metro_food_search(item):
         if (count >= len(price_arr)): break
         price_arr[count]["name"] = food_item.contents[0]
         count += 1
-        #print(food_item.contents)
     
     # remove items with names more than 3x longer than search word
     # so that stuff like "salted banana crisps" don't appear when you search for "banana"
@@ -61,22 +58,18 @@ def get_price(item):
     if (item == None or item == ""): return 0.0
     price_arr = metro_food_search(item)
     if (len(price_arr) == 0): return 0.0
-    price = statistics.mean(metro_food_search(item))
-    #print (price)
+    price = min(metro_food_search(item))
     return price
 
 def get_price_for_list(list):
     total = 0
     for item in list:
-        total += get_price(item)
+        price = get_price(item)
+        print(item + ": $" + str(price))
+        total += price
     return total
 
-items = ["avocados", "tomatoes", "onion", "cilantro", "lemon juice", "jalapeno pepper"]
 # TESTING
-
-#for item in items:
-#    print(item)
-#    metro_food_search(item)
 
 #with open('recipes.json','r') as f:
 #    recipes_dict = json.load(f)

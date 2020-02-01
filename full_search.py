@@ -1,7 +1,7 @@
-from recipescraper import *
-from foodpricescraper import *
-from IngredientScraper import *
-from DirectionScraper import *
+from recipescraper		import *
+from foodpricescraper	import *
+from IngredientScraper	import *
+from DirectionScraper	import *
 def get_stuff(recipe_name):
 	temp_arr = get_recipes_for_search(recipe_name)
 	if (len(temp_arr) == 0): 
@@ -17,4 +17,4 @@ def get_stuff(recipe_name):
 	print("$" + str(get_price_for_list(get_ingredients(url))))
 
 
-get_stuff("chilli")
+get_stuff("guac")
