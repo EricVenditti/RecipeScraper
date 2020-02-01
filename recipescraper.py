@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup  # bs4 is beautiful soup
 import requests
 import json
+import re
 
 '''
 python requests libary has 3 parts 
@@ -28,22 +29,29 @@ recipes = []
 # creating json objects with KEY: VALUE
 link = content.find('a').get('href')
 print(link)
-for recipe in content.findAll('span', attrs={"class": "stars stars-5"}):
-    recipeObject = {
-        "rating": recipe.attrs['data-ratingstars']
-    }
-    recipes.append(recipeObject)
 
-# for tweetObject in tweetArr:
-#	print(tweetObject)
+print("ratings")
+for recipe in content.findAll('span', attrs={'class': re.compile("^stars stars-.*")}):  #stars stars-5 is the 5 stars image heading. This looks for all ratings
+    print(recipe.attrs['data-ratingstars'])
+    #recipeObject = {
+    #    "rating": recipe.attrs['data-ratingstars']
+    #}
+    #recipes.append(recipeObject)
+
+
+print("links")
+for recipe in content.findAll('h3', attrs = {"class": "fixed-recipe-card__h3"}):
+    print(recipe.contents[1].attrs["href"])
+
 
 with open('recipes.json', 'w') as outfile:
     json.dump(recipes, outfile)
 
 # select all <p> paragraph tags with tag content .text(only text
 # contents of the file)
-with open('recipes.json') as json_data:
-    jsonData = json.load(json_data)
-for i in jsonData:
-    print(i['rating'])
-    #if (i['price'].find("$") == -1): continue
+#with open('recipes.json') as json_data:
+#    jsonData = json.load(json_data)
+#print("ratings")
+#for i in jsonData:
+#    print(i['rating'])
+#    #if (i['price'].find("$") == -1): continue
