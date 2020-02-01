@@ -44,16 +44,17 @@ def get_ingredients(url):
         # preparing for searching grocery stores
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
         andLoc = ingredientText.find(" and")
-        #print(andLoc)
+        # if there is an "and ..." string, return a string without it (seems to be very common with recipes
         if(andLoc != -1):
             ingredientText = ingredientText[: andLoc]
         for word in nonIngredientList:
             ingredientText = ingredientText.replace(word, "")   # removes words from the list
-        ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+        ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces (L and R)
         ingredientText = ingredientText.rstrip()
-        if(len(ingredientText) > 0):
+        if(len(ingredientText) > 0):              # removes empty strings (i.e. "salt" would be removed and return "\n"
             ingredients.append(ingredientText)
 
+    # json dump
     with open('ingredients.json', 'w') as outfile:
         json.dump(ingredients, outfile)
 
