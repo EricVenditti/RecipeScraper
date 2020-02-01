@@ -63,3 +63,6 @@ def get_ingredients(url):
         jsonData = json.load(json_data)
 
     return ingredients
+
+print("help")
+print(get_ingredients(url))
