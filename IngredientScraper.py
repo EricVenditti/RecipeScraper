@@ -12,24 +12,39 @@ success is 200. troubleshoot codes at restapitutorial.com
 CONTENT: the content we'd like to grab/print
 '''
 
-url = 'https://www.allrecipes.com/recipe/11120/crazy-cookie-calzones/?internalSource=hub%20recipe&referringContentType=Search'
+url = 'https://www.allrecipes.com/recipe/8372/black-magic-cake/?internalSource=hub%20recipe&referringContentType=Search&clickId=cardslot%204'
 print(url)
 
 response = requests.get(url, timeout=5)  # access url 5 times max
 content = BeautifulSoup(response.content, "html.parser")
 ingredients = []
-
-#print(content.prettify())
-#step = content.find('div', attrs={"class": "toggle-similar__title"})
-#link = content.find('a').get('href')
-#print(step)
-#print(link)
 # step = content.find('div', attrs={"class": "direction-lists"}).text
 # print(step)
 # creating json objects with KEY: VALUE
 
+nonIngredientList = ["teaspoon", "dessertspoon", "tablespoon", "ounce", "pound",
+                        "cup", "pint", "quart", "gallon",
+                        "can", "bag", "package", "bulk",
+                        "pinch", "smidgen", "drop", "dash", "scruple", "coffeespoon", "pinches", "smidgens", "dashes",
+                        "firmly packed", "lightly packed", "even", "level", "rounded", "sifted",
+                        "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
+                        "fresh", "stalk", "drained",
+                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water"]
+tempList = nonIngredientList.copy()
+for item in tempList:
+    nonIngredientList.append(item + "s")
+nonIngredientList.reverse()
+
 for ingredient in content.findAll('span', attrs={"itemprop": "recipeIngredient"}):
-    print(ingredient.text)
+    ingredientText = ingredient.text
+    ingredientText = ''.join([i for i in ingredientText if (i.isalpha() or i == ' ')])
+    # remove all the non-necessary adjectives, verbs, measurements in the ingredient list
+    # preparing for searching grocery stores
+    ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+    for word in nonIngredientList:
+        ingredientText = ingredientText.replace(word, "")   # removes words from the list
+    ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+    print(ingredientText)
 
 with open('ingredients.json', 'w') as outfile:
     json.dump(ingredients, outfile)
