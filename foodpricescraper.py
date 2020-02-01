@@ -84,17 +84,17 @@ items = ["avocados", "tomatoes", "onion", "cilantro", "lemon juice", "jalapeno p
 #for r in recipes_dict:
 #    print(r["desc"])
 #    metro_food_search(r["desc"]) # should be changed to ingredients instead
-print("banana")
-print(get_price("banana"))
-print("items")
-print(get_price_for_list(items))
-
 #print("banana")
-#metro_food_search("banana")
-#print("apple")
-#metro_food_search("apple")
-#print("pie")
-#metro_food_search("pie")
-print("shit pie")               # test for something metro doesn't have
-metro_food_search("shit pie")
-get_price("shit pie")
+#print(get_price("banana"))
+#print("items")
+#print(get_price_for_list(items))
+
+##print("banana")
+##metro_food_search("banana")
+##print("apple")
+##metro_food_search("apple")
+##print("pie")
+##metro_food_search("pie")
+#print("shit pie")               # test for something metro doesn't have
+#metro_food_search("shit pie")
+#get_price("shit pie")

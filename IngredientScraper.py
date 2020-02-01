@@ -12,8 +12,8 @@ success is 200. troubleshoot codes at restapitutorial.com
 CONTENT: the content we'd like to grab/print
 '''
 
-url = 'https://www.allrecipes.com/recipe/14064/easy-guacamole/'
-print(url)
+#url = 'https://www.allrecipes.com/recipe/14064/easy-guacamole/'
+#print(url)
 
 def get_ingredients(url):
     response = requests.get(url, timeout=5)  # access url 5 times max
@@ -43,6 +43,7 @@ def get_ingredients(url):
         for word in nonIngredientList:
             ingredientText = ingredientText.replace(word, "")   # removes words from the list
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+        ingredients.append(ingredientText)
 
     with open('ingredients.json', 'w') as outfile:
         json.dump(ingredients, outfile)
@@ -52,4 +53,4 @@ def get_ingredients(url):
     with open('ingredients.json') as json_data:
         jsonData = json.load(json_data)
 
-    return ingredientText
+    return ingredients

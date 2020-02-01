@@ -50,15 +50,16 @@ def get_recipes_for_search(item):
 
     with open('recipes.json') as json_data:
         jsonData = json.load(json_data)
-    print("link")
-    for i in jsonData:
-        print(i['link'])
+    #print("link")
+    #for i in jsonData:
+    #    print(i['link'])
+    return jsonData
         #if (i['price'].find("$") == -1): continue
 
 # TESTING CODE
-print("guac")
-get_recipes_for_search("guac")
-print("mexican")
-get_recipes_for_search("mexican")
-print("dutch oven apple crisp")
-get_recipes_for_search("dutch oven apple crisp")
+#print("guac")
+#get_recipes_for_search("guac")
+#print("mexican")
+#get_recipes_for_search("mexican")
+#print("dutch oven apple crisp")
+#get_recipes_for_search("dutch oven apple crisp")
