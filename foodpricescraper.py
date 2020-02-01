@@ -47,6 +47,14 @@ for item in items:
     print(item)
     metro_food_search(item)
 
+with open('recipes.json','r') as f:
+    recipes_dict = json.load(f)
+    print(json.dumps(recipes_dict, indent = 4, sort_keys=True)) # prettified printing
+for r in recipes_dict:
+    print(r["desc"])
+    metro_food_search(r["desc"]) # should be changed to ingredients instead
+
+
 print("banana")
 metro_food_search("banana")
 print("apple")
