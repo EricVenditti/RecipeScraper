@@ -17,4 +17,4 @@ def get_stuff(recipe_name):
 	print("$" + str(get_price_for_list(get_ingredients(url))))
 
 
-get_stuff("guac")
+#get_stuff("guac")

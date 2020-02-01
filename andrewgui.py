@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, simpledialog, messagebox
+from full_search import *
 
 LARGE_FONT = ("Verdana", 12)
 NORM_FONT = ("Verdana", 10)
@@ -39,6 +40,7 @@ class StartPage(tk.Frame):
         def searchRecipe():
             looking_for = message1.get()
             print(looking_for)
+            get_stuff(looking_for)
 
         label = ttk.Label(self, text="What food would you like to make?", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
