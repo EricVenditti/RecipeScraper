@@ -6,6 +6,7 @@ LARGE_FONT = ("Verdana", 12)
 NORM_FONT = ("Verdana", 10)
 SMALL_FONT = ("Verdana", 8)
 
+recipe_to_search = ""
 
 class window(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -39,8 +40,12 @@ class StartPage(tk.Frame):
 
         def searchRecipe():
             looking_for = message1.get()
-            print(looking_for)
-            get_top_five(looking_for)
+            recipe_to_search = looking_for
+            print("***" + recipe_to_search)
+            recipe_dict = get_top_five(looking_for)
+            for recipe in recipe_dict:
+                print("hello")
+            return looking_for
 
         label = ttk.Label(self, text="What food would you like to make?", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
@@ -53,8 +58,11 @@ class StartPage(tk.Frame):
                             command=lambda: controller.show_frame(PageOne))
         button1.pack()
         '''
+        #pg = PageOne
+        #gp.updateRecipe
         button1 = ttk.Button(self, text="Search",
-                             command=lambda: [searchRecipe(),
+                             command=lambda: [
+                                                searchRecipe(),
                                               controller.show_frame(PageOne)])
         button1.pack()
 
@@ -68,14 +76,25 @@ class PageOne(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Food options displayed here", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
+        recipeArr = get_top_five(recipe_to_search)
+        print(recipe_to_search)
+        print("hi")
+        print(recipeArr)
+        print("hi")
+
         button2 = ttk.Button(self, text="Back to Search",
-                             command=lambda: controller.show_frame(StartPage))
+            command=lambda: controller.show_frame(StartPage))
         button2.pack()
 
         button3 = ttk.Button(self, text="To page 2",
-                             command=lambda: controller.show_frame(PageTwo))
+                             command=lambda: self.updateRecipe())#controller.show_frame(PageTwo))
         button3.pack()
-
+    def updateRecipe(self):
+        recipeArr = get_top_five(recipe_to_search)
+        print(recipe_to_search)
+        print("hi")
+        print(recipeArr)
+        print("hi")
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
