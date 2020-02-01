@@ -44,7 +44,7 @@ def get_ingredients(url):
         # preparing for searching grocery stores
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
         andLoc = ingredientText.find(" and")
-        print(andLoc)
+        #print(andLoc)
         if(andLoc != -1):
             ingredientText = ingredientText[: andLoc]
         for word in nonIngredientList:
