@@ -40,7 +40,7 @@ class StartPage(tk.Frame):
         def searchRecipe():
             looking_for = message1.get()
             print(looking_for)
-            get_stuff(looking_for)
+            get_top_five(looking_for)
 
         label = ttk.Label(self, text="What food would you like to make?", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
