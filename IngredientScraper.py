@@ -12,44 +12,44 @@ success is 200. troubleshoot codes at restapitutorial.com
 CONTENT: the content we'd like to grab/print
 '''
 
-url = 'https://www.allrecipes.com/recipe/15035/granola/?internalSource=hub%20recipe&referringContentType=Search'
+url = 'https://www.allrecipes.com/recipe/14064/easy-guacamole/'
 print(url)
 
-response = requests.get(url, timeout=5)  # access url 5 times max
-content = BeautifulSoup(response.content, "html.parser")
-ingredients = []
-# step = content.find('div', attrs={"class": "direction-lists"}).text
-# print(step)
-# creating json objects with KEY: VALUE
+def get_ingredients(url):
+    response = requests.get(url, timeout=5)  # access url 5 times max
+    content = BeautifulSoup(response.content, "html.parser")
+    ingredients = []
 
-nonIngredientList = ["teaspoon", "dessertspoon", "tablespoon", "ounce", "pound",
+    nonIngredientList = ["teaspoon", "dessertspoon", "tablespoon", "ounce", "pound",
                         "cup", "pint", "quart", "gallon",
                         "can", "bag", "package", "bulk",
                         "pinch", "smidgen", "drop", "dash", "scruple", "coffeespoon", "pinches", "smidgens", "dashes",
                         "firmly packed", "lightly packed", "even", "level", "rounded", "sifted",
                         "chopped", "peeled", "seeded", "grated", "grilled", "layered", "melted", "scrambled","sliced", "spread", "blended",
                         "fresh", "stalk", "drained", "pitted", "peeled",
-                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water"]
-tempList = nonIngredientList.copy()
-for item in tempList:
-    nonIngredientList.append(item + "s")
-nonIngredientList.reverse()
+                        "salt", "pepper", "olive oil", "conola oil", "vegetable oil", "water", "hot water", "boiling water",
+                        "to taste", "add to taste"]
+    tempList = nonIngredientList.copy()
+    for item in tempList:
+        nonIngredientList.append(item + "s")
+    nonIngredientList.reverse()
 
-for ingredient in content.findAll('span', attrs={"itemprop": "recipeIngredient"}):
-    ingredientText = ingredient.text
-    ingredientText = ''.join([i for i in ingredientText if (i.isalpha() or i == ' ')])
-    # remove all the non-necessary adjectives, verbs, measurements in the ingredient list
-    # preparing for searching grocery stores
-    ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
-    for word in nonIngredientList:
-        ingredientText = ingredientText.replace(word, "")   # removes words from the list
-    ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
-    print(ingredientText)
+    for ingredient in content.findAll('span', attrs={"itemprop": "recipeIngredient"}):
+        ingredientText = ingredient.text
+        ingredientText = ''.join([i for i in ingredientText if (i.isalpha() or i == ' ')])
+        # remove all the non-necessary adjectives, verbs, measurements in the ingredient list
+        # preparing for searching grocery stores
+        ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
+        for word in nonIngredientList:
+            ingredientText = ingredientText.replace(word, "")   # removes words from the list
+        ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
 
-with open('ingredients.json', 'w') as outfile:
-    json.dump(ingredients, outfile)
+    with open('ingredients.json', 'w') as outfile:
+        json.dump(ingredients, outfile)
 
-# select all <p> paragraph tags with tag content .text(only text
-# contents of the file)
-with open('ingredients.json') as json_data:
-    jsonData = json.load(json_data)
+    # select all <p> paragraph tags with tag content .text(only text
+    # contents of the file)
+    with open('ingredients.json') as json_data:
+        jsonData = json.load(json_data)
+
+    return ingredientText
