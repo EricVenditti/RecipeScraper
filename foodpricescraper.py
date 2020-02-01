@@ -5,6 +5,8 @@ import statistics
 
 from util import * # see util.py
 
+ingredientDescriptions = ["shredded", "ground", "minced", "diced", "frozen", "organic", "sharp", "dry", "swiss", "cut", "pulled"]
+
 def metro_food_search(item):
     print_arr = False
     url = 'https://www.metro.ca/en/search?filter=' + item + '&freeText=true'
@@ -51,13 +53,17 @@ def metro_food_search(item):
     if (print_arr):                     # print if applicable
         for d in price_return_arr:
             print(str(d))
-    
+    if(len(price_return_arr) == 0):
+        for ingredient in ingredientDescriptions:   # if there is another descriptive word that can be removed
+            newItem = item.replace(ingredient, "")
+        if (newItem != item):
+            return metro_food_search(newItem)
+
+
     return price_return_arr
 
 def get_price(item):
     if (item == None or item == ""): return 0.0
-            for (word in ingredientDescriptions):   # if there is another descriptive word that can be removed
-                item = ingredientDescriptions.replace(word, "")
     price_arr = metro_food_search(item)
     if (len(price_arr) == 0): return 0.0
     price = min(metro_food_search(item))

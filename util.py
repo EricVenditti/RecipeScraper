@@ -1,7 +1,5 @@
 import statistics
 
-ingredientDescriptions = ["shredded", "ground", "minced", "diced", "frozen", "organic", "sharp", "dry", "swiss", "cut", "pulled"]
-
 def remove_outliers(arr):
     if (len(arr) < 3): return arr
     avg = statistics.mean(arr)

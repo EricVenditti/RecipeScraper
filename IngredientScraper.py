@@ -33,7 +33,7 @@ def get_ingredients(url):
 
     for ingredient in content.findAll('span', attrs={"itemprop": "recipeIngredient"}):
         ingredientText = ingredient.text
-        ingredientText = ''.join([i for i in ingredientText if (i.isalpha() or i == ' ')])
+        ingredientText = ''.join([i for i in ingredientText if (i.isalpha() or i == ' ' or i == "-")])
         # remove all the non-necessary adjectives, verbs, measurements in the ingredient list
         # preparing for searching grocery stores
         ingredientText = ingredientText.lstrip()  # gets rid of leading/trailing spaces
